@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "aws-sdk": "^2.50.0",
     "console.table": "^0.8.0",
     "lighthouse": "^1.6.5",
     "request": "^2.81.0",
