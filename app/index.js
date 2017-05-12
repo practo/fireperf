@@ -64,7 +64,7 @@ function runTest(totalRuns, url, callback) {
       formValues['url'] = finalUrl;
       formValues['generation-time'] = lighthouseResults.generatedTime;
 
-      config.form_uri && postTestData(process.env.FORM_URI);
+      postTestData(process.env.FORM_URI);
 
       console.log('Running for URL [', finalUrl, ']\n');
       console.table(values);
