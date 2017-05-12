@@ -14,7 +14,7 @@ const flags = { output: 'json' };
 function runTest(totalRuns, url, callback) {
   let currentRun = 0;
 
-  let postTestData = (formUri) => {
+  let postTestData = (formUri, formValues) => {
     rpn({
         method: 'POST',
         uri: formUri,
@@ -64,7 +64,7 @@ function runTest(totalRuns, url, callback) {
       formValues['url'] = finalUrl;
       formValues['generation-time'] = lighthouseResults.generatedTime;
 
-      postTestData(process.env.FORM_URI);
+      postTestData(process.env.FORM_URI, formValues);
 
       console.log('Running for URL [', finalUrl, ']\n');
       console.table(values);
