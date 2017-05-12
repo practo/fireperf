@@ -64,7 +64,7 @@ function runTest(totalRuns, url, callback) {
       formValues['url'] = finalUrl;
       formValues['generation-time'] = lighthouseResults.generatedTime;
 
-      config.form_uri && postTestData(config.form_uri);
+      config.form_uri && postTestData(process.env.FORM_URI);
 
       console.log('Running for URL [', finalUrl, ']\n');
       console.table(values);
@@ -91,7 +91,7 @@ function runTest(totalRuns, url, callback) {
 
 var sqs = new AWS.SQS({region: 'ap-southeast-1', apiVersion: '2012-11-05'});
 
-var queueURL = config.sqs_queue_url;
+var queueURL = process.env.QUEUE_URL;
 
 var params = {
   AttributeNames: ["SentTimestamp"],
