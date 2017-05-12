@@ -5,8 +5,8 @@ const ChromeLauncher = require('lighthouse/lighthouse-cli/chrome-launcher.js').C
 const request = require('request');
 const rpn = require('request-promise-native');
 const AWS = require('aws-sdk')
-const testConfig = require('lighthouse-config');
-const config = require('config');
+const testConfig = require('./lighthouse-config');
+// const config = require('./config');
 
 const launcher = new ChromeLauncher({port: 9222, autoSelectChrome: true});
 const flags = { output: 'json' };
