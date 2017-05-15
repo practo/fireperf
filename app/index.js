@@ -69,7 +69,6 @@ function runTest({ totalRuns, url, pageName, pageGroup }, callback) {
       }
 
       formValues['url'] = finalUrl;
-      formValues['generation-time'] = lighthouseResults.generatedTime;
       formValues['name'] = pageName;
       formValues['group'] = pageGroup;
 
@@ -90,7 +89,6 @@ function runTest({ totalRuns, url, pageName, pageGroup }, callback) {
       runOnce();
     }
     else {
-      console.log('\n ~ Done, deleting SQS message');
       callback()
     }
   }
