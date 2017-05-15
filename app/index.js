@@ -120,7 +120,18 @@ sqs.receiveMessage(params, function(err, data) {
       return;
     }
 
-    // { "runs": 3, "url": "https://practo.com" }
+    /**
+     * Queue message format =>
+     *
+     * {
+     *   "runs": 100,
+     *   "url": "https://example.com",
+     *   "page_name": "Assign a readable name to this page",
+     *   "page_group": "A context / tag to assign to the page"
+     * }
+     *
+     */
+
     let message = JSON.parse(data.Messages[0].Body);
 
     let url = message.url;
