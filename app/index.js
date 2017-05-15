@@ -14,18 +14,6 @@ const flags = { output: 'json' };
 function runTest(totalRuns, url, callback) {
   let currentRun = 0;
 
-  let postTestData = (formUri, formValues) => {
-    rpn({
-        method: 'POST',
-        uri: formUri,
-        form: formValues
-      })
-    .then((error, response, body) => {
-      if (!error && response.statusCode == 200) {
-        console.log('\n ~ Results uploaded ~')
-      }
-    })
-    .catch(err => console.log('\n ~ Received a StatusCode error'));
   }
 
   let runOnce = () => {
@@ -64,7 +52,6 @@ function runTest(totalRuns, url, callback) {
       formValues['url'] = finalUrl;
       formValues['generation-time'] = lighthouseResults.generatedTime;
 
-      postTestData(process.env.FORM_URI, formValues);
 
       console.log('Running for URL [', finalUrl, ']\n');
       console.table(values);
