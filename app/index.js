@@ -144,7 +144,7 @@ sqs.receiveMessage(params, function(err, data) {
 
     console.log(`Launching test runner with ~ ${totalRuns} runs, for URL ~ ${url}`);
 
-    runTest(totalRuns, url, function() {
+    runTest({ totalRuns, url, pageName, pageGroup }, function() {
       var deleteParams = {
         QueueUrl: queueURL,
         ReceiptHandle: data.Messages[0].ReceiptHandle
