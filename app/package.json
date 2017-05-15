@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "aws-sdk": "^2.50.0",
-    "console.table": "^0.8.0",
-    "lighthouse": "^1.6.5",
-    "request": "^2.81.0",
-    "request-promise-native": "^1.0.4"
+    "aws-sdk": "2.50.0",
+    "console.table": "0.8.0",
+    "lighthouse": "1.6.5",
+    "mysql": "2.13.0",
+    "request": "2.81.0",
+    "request-promise-native": "1.0.4"
   },
   "devDependencies": {},
   "scripts": {
