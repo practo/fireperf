@@ -11,9 +11,28 @@ const config = require('./config');
 const launcher = new ChromeLauncher({port: 9222, autoSelectChrome: true});
 const flags = { output: 'json' };
 
-function runTest(totalRuns, url, callback) {
+let mysql      = require('mysql');
+let connection = mysql.createConnection({
+  host     : config.database.host,
+  user     : config.database.user,
+  password : config.database.password,
+  database : config.database.name
+});
+
+function runTest({ totalRuns, url, pageName, pageGroup }, callback) {
   let currentRun = 0;
 
+  let writeTestData = (formValues) => {
+    let formattedValues = {};
+
+    for(i in formValues) {
+      formattedValues[i.replace(/-/g, '_')] = formValues[i];
+    }
+
+    var query = connection.query('INSERT INTO page_metrics SET ?', formattedValues, function (error, results, fields) {
+      if (error) throw error;
+      console.log('----- Completed -----');
+    });
   }
 
   let runOnce = () => {
@@ -51,7 +70,10 @@ function runTest(totalRuns, url, callback) {
 
       formValues['url'] = finalUrl;
       formValues['generation-time'] = lighthouseResults.generatedTime;
+      formValues['name'] = pageName;
+      formValues['group'] = pageGroup;
 
+      writeTestData(formValues);
 
       console.log('Running for URL [', finalUrl, ']\n');
       console.table(values);
@@ -104,6 +126,8 @@ sqs.receiveMessage(params, function(err, data) {
     let url = message.url;
     let runsCalled = 0;
     let totalRuns = message.runs || 3;
+    let pageName = message.page_name;
+    let pageGroup = message.page_group;
 
     calledRuns = 0;
 
