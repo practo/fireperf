@@ -37,11 +37,12 @@ WORKDIR /app
 
 RUN npm install
 
-RUN chmod +x /entry.sh
-
 User user
+
 WORKDIR /tmp
 VOLUME /tmp/chrome-data
 
+RUN chown -R user: /app
+RUN chmod +x /entry.sh
 
 CMD ["/entry.sh"]
