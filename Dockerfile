@@ -35,13 +35,12 @@ COPY app/ /app
 
 WORKDIR /app
 
+RUN chown -R user: /app
 RUN npm install
 
-RUN chown -R user: /app
 RUN chmod +x /entry.sh
 
 User user
-
 WORKDIR /tmp
 VOLUME /tmp/chrome-data
 
