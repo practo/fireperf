@@ -159,6 +159,7 @@ sqs.receiveMessage(params, function(err, data) {
           console.log("Delete Error", err);
         } else {
           console.log("Message Deleted", data);
+          process.exit();
         }
       });
     });
