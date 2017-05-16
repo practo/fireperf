@@ -119,8 +119,7 @@ var params = {
   MaxNumberOfMessages: 1,
   MessageAttributeNames: ["All"],
   QueueUrl: queueURL,
-  WaitTimeSeconds: 0,
-  VisibilityTimeout: 0
+  WaitTimeSeconds: 0
 };
 
 sqs.receiveMessage(params, function(err, data) {
