@@ -148,8 +148,8 @@ sqs.receiveMessage(params, function(err, data) {
     let url = message.pageUrl;
     let runsCalled = 0;
     let totalRuns = message.testRuns || 3;
-    let pageName = message.page_name;
-    let pageGroup = message.page_group;
+    let pageName = message.pageName;
+    let pageGroup = message.pageGroup;
     let devicePlatform = message.devicePlatform;
 
     calledRuns = 0;
