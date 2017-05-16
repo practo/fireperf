@@ -48,7 +48,6 @@ function runTest({ totalRuns, url, pageName, pageGroup, devicePlatform }, callba
       return launcher.run();
     })
     .then(() => {
-      console.log('-------- Starting lighthouse -------\n');
       return Lighthouse(url, flags, testConfig)
     })
     .then(results => launcher.kill().then(() => results))
