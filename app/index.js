@@ -102,6 +102,14 @@ function runTest({ totalRuns, url, pageName, pageGroup, devicePlatform }, callba
   callRun();
 }
 
+// runTest({
+//   "totalRuns": 1,
+//   "url": "https://example.com",
+//   "pageName": "Assign a readable name to this page",
+//   "pageGroup": "A context / tag to assign to the page",
+//   "devicePlatform": "DESKTOP"
+// });
+
 var sqs = new AWS.SQS({region: 'ap-southeast-1', apiVersion: '2012-11-05'});
 
 var queueURL = config.sqs.url;
@@ -137,9 +145,9 @@ sqs.receiveMessage(params, function(err, data) {
 
     let message = JSON.parse(data.Messages[0].Body);
 
-    let url = message.url;
+    let url = message.pageUrl;
     let runsCalled = 0;
-    let totalRuns = message.runs || 3;
+    let totalRuns = message.testRuns || 3;
     let pageName = message.page_name;
     let pageGroup = message.page_group;
     let devicePlatform = message.devicePlatform;
