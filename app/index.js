@@ -9,7 +9,6 @@ const testConfig = require('./lighthouse-config');
 const config = require('./config');
 
 const launcher = new ChromeLauncher({port: 9222, autoSelectChrome: true});
-const flags = { output: 'json' };
 
 let mysql      = require('mysql');
 let connection = mysql.createConnection({
@@ -36,7 +35,14 @@ function runTest({ totalRuns, url, pageName, pageGroup }, callback) {
   }
 
   let runOnce = () => {
-   launcher
+    let flags = {
+      'output': 'json',
+      'disableDeviceEmulation': platform === 'DESKTOP' ? true : false,
+      'disableCpuThrottling': false
+    };
+
+
+    launcher
     .isDebuggerReady()
     .catch(() => {
       return launcher.run();
