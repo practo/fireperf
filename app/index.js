@@ -18,7 +18,7 @@ let connection = mysql.createConnection({
   database : config.database.name
 });
 
-function runTest({ totalRuns, url, pageName, pageGroup }, callback) {
+function runTest({ totalRuns, url, pageName, pageGroup, devicePlatform }, callback) {
   let currentRun = 0;
 
   let writeTestData = (formValues) => {
@@ -37,7 +37,7 @@ function runTest({ totalRuns, url, pageName, pageGroup }, callback) {
   let runOnce = () => {
     let flags = {
       'output': 'json',
-      'disableDeviceEmulation': platform === 'DESKTOP' ? true : false,
+      'disableDeviceEmulation': devicePlatform === 'DESKTOP' ? true : false,
       'disableCpuThrottling': false
     };
 
@@ -77,6 +77,7 @@ function runTest({ totalRuns, url, pageName, pageGroup }, callback) {
       formValues['url'] = finalUrl;
       formValues['name'] = pageName;
       formValues['group'] = pageGroup;
+      formValues['platform'] = devicePlatform;
 
       writeTestData(formValues);
 
@@ -124,7 +125,7 @@ sqs.receiveMessage(params, function(err, data) {
       return;
     }
 
-    /**
+    /*
      * Queue message format =>
      *
      * {
@@ -133,7 +134,6 @@ sqs.receiveMessage(params, function(err, data) {
      *   "page_name": "Assign a readable name to this page",
      *   "page_group": "A context / tag to assign to the page"
      * }
-     *
      */
 
     let message = JSON.parse(data.Messages[0].Body);
@@ -143,12 +143,13 @@ sqs.receiveMessage(params, function(err, data) {
     let totalRuns = message.runs || 3;
     let pageName = message.page_name;
     let pageGroup = message.page_group;
+    let devicePlatform = message.devicePlatform;
 
     calledRuns = 0;
 
     console.log(`Launching test runner with ~ ${totalRuns} runs, for URL ~ ${url}`);
 
-    runTest({ totalRuns, url, pageName, pageGroup }, function() {
+    runTest({ totalRuns, url, pageName, pageGroup, devicePlatform }, function() {
       var deleteParams = {
         QueueUrl: queueURL,
         ReceiptHandle: data.Messages[0].ReceiptHandle
