@@ -13,5 +13,5 @@ export LIGHTHOUSE_CHROMIUM_PATH=/usr/bin/google-chrome
 
 sleep 8
 
-node /app/get-config.js
+# node /app/get-config.js
 node /app/index.js
