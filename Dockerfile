@@ -37,6 +37,8 @@ WORKDIR /app
 
 RUN npm install
 
+RUN chmod +x /entry.sh
+
 WORKDIR /tmp
 VOLUME /tmp/chrome-data
 
