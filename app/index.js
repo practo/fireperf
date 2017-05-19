@@ -10,10 +10,10 @@ const testConfig = require('./lighthouse-config');
 
 let mysql      = require('mysql');
 let connection = mysql.createConnection({
-  host     : process.ENV.db_host,
-  user     : process.ENV.db_user,
-  password : process.ENV.db_password,
-  database : process.ENV.db_name
+  host     : process.env.db_host,
+  user     : process.env.db_user,
+  password : process.env.db_password,
+  database : process.env.db_name
 });
 
 let messages = [{
