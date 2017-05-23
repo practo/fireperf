@@ -6,7 +6,6 @@ const request = require('request');
 const rpn = require('request-promise-native');
 const AWS = require('aws-sdk')
 const testConfig = require('./lighthouse-config');
-// const config = require('./config');
 
 let mysql      = require('mysql');
 let connection = mysql.createConnection({
@@ -16,43 +15,7 @@ let connection = mysql.createConnection({
   database : process.env.db_name
 });
 
-let messages = [{
-    "testRuns": 1,
-    "pageUrl": "https://www.practo.com/bangalore/dentist?utm_source=perf_test",
-    "pageName": "LISTING_DOCTOR",
-    "pageGroup": "SEARCH",
-    "devicePlatform": "MOBILE"
-  }, {
-    "testRuns": 1,
-    "pageUrl": "https://www.practo.com/bangalore/dentist?utm_source=perf_test",
-    "pageName": "LISTING_DOCTOR",
-    "pageGroup": "SEARCH",
-    "devicePlatform": "DESKTOP"
-  }, {
-    "testRuns": 1,
-    "pageUrl": "https://www.practo.com?utm_source=perf_test",
-    "pageName": "HOME",
-    "pageGroup": "SEARCH",
-    "devicePlatform": "MOBILE"
-  }, {
-    "testRuns": 1,
-    "pageUrl": "https://www.practo.com?utm_source=perf_test",
-    "pageName": "HOME",
-    "pageGroup": "SEARCH",
-    "devicePlatform": "DESKTOP"
-  }, {
-    "testRuns": 1,
-    "pageUrl": "https://www.practo.com/bangalore/doctor/dr-ramya-dentist-7?utm_source=perf_test",
-    "pageName": "DOCTOR_PROFILE",
-    "pageGroup": "SEARCH",
-    "devicePlatform": "MOBILE"
-  }, {
-    "testRuns": 1,
-    "pageUrl": "https://www.practo.com/bangalore/doctor/dr-ramya-dentist-7?utm_source=perf_test",
-    "pageName": "DOCTOR_PROFILE",
-    "pageGroup": "SEARCH",
-    "devicePlatform": "DESKTOP"
-  }];
+let messages = require('./messages');
 
 let writeTestData = (formValues) => {
   let formattedValues = {};
